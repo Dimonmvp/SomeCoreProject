@@ -18,6 +18,8 @@ public class Runner {
         student.setSurname("BObryshev");
         student.setAge(20);
 
+        Handler.createTeacher();
+
         University university = new University();
         university.setName("KHPI");
         Handler.enrollStudent(university,student);

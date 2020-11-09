@@ -17,10 +17,9 @@ public class Student extends Human{
     }
 
     public Student(String surname, String name, String patronymic, Integer age,
-                 String group, Integer course, Float rate) {
+                 String group, Float rate) {
         super(surname, name, patronymic, age);
         this.group = group;
-        this.course = course;
         this.rate = rate;
     }
 
@@ -30,12 +29,12 @@ public class Student extends Human{
         if (!(o instanceof Student)) return false;
         if (!super.equals(o)) return false;
         Student student = (Student) o;
-        return group.equals(student.group) &&
-                course.equals(student.course);
+        return Objects.equals(getGroup(), student.getGroup()) &&
+                Objects.equals(getRate(), student.getRate());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), group, course);
+        return Objects.hash(super.hashCode(), getGroup(), getRate());
     }
 }
