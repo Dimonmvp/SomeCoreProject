@@ -19,7 +19,7 @@ public class HandlerTest {
     @Before
     public void setUp(){
         student = StudentHandler.createStudent("Dima","Bobryshev","Vitalievich",
-                20,4.4f,"rpz-426");
+                20,5f,"rpz-426");
         Set<String> subjects = new HashSet<>();
         subjects.add("Math");
         subjects.add("English");

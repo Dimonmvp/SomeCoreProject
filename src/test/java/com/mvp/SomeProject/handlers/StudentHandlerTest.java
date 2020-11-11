@@ -1,6 +1,7 @@
 package com.mvp.SomeProject.handlers;
 
 import com.mvp.SomeProject.exceptions.StudentException;
+import com.mvp.SomeProject.models.Student;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -17,21 +18,25 @@ public class StudentHandlerTest extends HandlerTest{
 
     @Test
     public void isUniversityContainsStudentTest(){
-        Assert.assertTrue(StudentHandler.isUniversityContainStudent(university,student));
+        Student student1 = StudentHandler.createStudent("Dima","Bobryshev","Vitalievich",
+                22,3.1f,"rpz-426");
+        university.getStudents().add(student);
+
+        Assert.assertTrue(UniversityHandler.isUniversityContainStudent(university,student1));
     }
 
     @Test
     public void deductStudentTest() throws StudentException {
         university.getStudents().add(student);
-        StudentHandler.deductStudent(university,student);
-        Assert.assertFalse(StudentHandler.isUniversityContainStudent(university, student));
+        UniversityHandler.deductStudent(university,student);
+        Assert.assertFalse(UniversityHandler.isUniversityContainStudent(university, student));
     }
 
 
     @Test
     public void enrollStudent() throws StudentException {
-        StudentHandler.enrollStudent(university,student);
+        UniversityHandler.enrollStudent(university,student);
 
-        Assert.assertTrue(StudentHandler.isUniversityContainStudent(university,student));
+        Assert.assertTrue(UniversityHandler.isUniversityContainStudent(university,student));
     }
 }

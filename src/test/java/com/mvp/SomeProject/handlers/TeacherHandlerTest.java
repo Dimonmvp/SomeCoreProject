@@ -1,6 +1,7 @@
 package com.mvp.SomeProject.handlers;
 
 import com.mvp.SomeProject.exceptions.TeacherException;
+import com.mvp.SomeProject.models.University;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -29,19 +30,19 @@ public class TeacherHandlerTest extends HandlerTest {
 
     @Test
     public void hireTeacherTest() throws TeacherException {
-        TeacherHandler.hireTeacher(university,teacher);
+        UniversityHandler.hireTeacher(university,teacher);
         Assert.assertTrue(university.getTeachers().contains(teacher));
     }
 
     @Test
     public void fireTeacherTest() throws TeacherException {
-        TeacherHandler.hireTeacher(university,teacher);
-        TeacherHandler.fireTeacher(university,teacher);
+        UniversityHandler.hireTeacher(university,teacher);
+        UniversityHandler.fireTeacher(university,teacher);
         Assert.assertFalse(university.getTeachers().contains(teacher));
     }
 
     @Test
     public void isTeacherWorksAtTheUniversityTest(){
-        Assert.assertFalse(TeacherHandler.isTeacherWorksAtTheUniversity(university,teacher));
+        Assert.assertFalse(UniversityHandler.isTeacherWorksAtTheUniversity(university,teacher));
     }
 }

@@ -23,7 +23,4 @@ public class Teacher extends Human{
         this.subject = subject;
         this.salary = salary;
     }
-
-
-
 }

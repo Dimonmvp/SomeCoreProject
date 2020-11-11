@@ -16,42 +16,32 @@ public class MarkRecordBookHandler extends Handler {
         if (!s.equals("EXIT")) {
             mark = new Mark();
             mark.setSubject(s);
-        List<Integer> strings = parseDate(readCorrect("data of the mark:", forDate, true));
+            List<Integer> strings = parseDate(readCorrect(
+                    "data of the mark:", forDate, true));
             GregorianCalendar gregorianCalendar = new GregorianCalendar();
-            gregorianCalendar.set(Calendar.MONTH,strings.get(1)-1);
-            gregorianCalendar.set(Calendar.YEAR,strings.get(2));
-            gregorianCalendar.set(Calendar.DAY_OF_MONTH,strings.get(0));
+            gregorianCalendar.set(Calendar.MONTH, strings.get(1) - 1);
+            gregorianCalendar.set(Calendar.YEAR, strings.get(2));
+            gregorianCalendar.set(Calendar.DAY_OF_MONTH, strings.get(0));
             mark.setDate(gregorianCalendar);
-        mark.setMark(Integer.parseInt(readCorrect("mark:",forMark,true)));
-        mark.setTeacherName(createNameOfTeacher(teacher));
+            mark.setMark(Integer.parseInt(readCorrect("mark:", forMark, true)));
+            mark.setTeacherName(createName(teacher));
         }
         return mark;
     }
 
-    private static String createNameOfTeacher(Teacher teacher){
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(teacher.getSurname());
-        stringBuilder.append(" ");
-        stringBuilder.append(teacher.getName());
-        stringBuilder.append(" ");
-        stringBuilder.append(teacher.getPatronymic());
-        return stringBuilder.toString();
-    }
-
-    public static RecordBook createRecordBook(Student student){
+    public static RecordBook createRecordBook(Student student) {
         RecordBook recordBook = new RecordBook();
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(student.getSurname());
-        stringBuilder.append(" ");
-        stringBuilder.append(student.getName());
-        stringBuilder.append(" ");
-        stringBuilder.append(student.getPatronymic());
-        recordBook.setStudent(stringBuilder.toString());
+        recordBook.setStudent(Handler.createStr(student.getSurname(), student.getName(), student.getPatronymic()));
         return recordBook;
     }
 
-    public static void addMarkToRecordBook(RecordBook recordBook,Mark mark){
+    public static void addMarkToRecordBook(RecordBook recordBook, Mark mark) {
         recordBook.getMarks().add(mark);
+    }
+
+
+    public static boolean isRecordBookContainMark(RecordBook recordBook,Mark mark){
+        return recordBook.getMarks().contains(mark);
     }
 
     private static String subjectOfTeacher(Teacher teacher) {
@@ -60,14 +50,14 @@ public class MarkRecordBookHandler extends Handler {
         System.out.println("If you don`t want to add mark from this teacher, you need to enter \"EXIT\"");
         boolean flag = true;
         do {
-            s = readCorrect("subject of the teacher that makes assessment:", forLetters, flag);
+            s = readCorrect("subject of the teacher that makes assessment:", forWord, flag);
             flag = false;
 
         } while (!(subject.contains(s)) && !s.equals("EXIT"));
         return s;
     }
 
-    private static List<Integer> parseDate(String calendar) {
+    public static List<Integer> parseDate(String calendar) {
         return Arrays.stream(calendar.split("-")).map(Integer::parseInt).collect(Collectors.toList());
     }
 }
